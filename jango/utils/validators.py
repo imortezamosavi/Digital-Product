@@ -6,4 +6,10 @@ class SKUValidator(RegexValidator):
     message = 'SKU must be alphanumric with 6 to 20 characters'
     code = 'invalid_sku'
 
+class PhoneNumberValidator(RegexValidator):
+    regex = r'^\+?1?\d{9,15}$'
+    message = 'Phone number must be between 10 and 16 digits'
+    code = 'invalid_phone_number'
+
+validate_phone_number = PhoneNumberValidator()
 validate_sku = SKUValidator()
