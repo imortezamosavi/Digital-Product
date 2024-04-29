@@ -1,8 +1,8 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-# Create your models here.
 from utils.validators import validate_sku
+# Create your models here.
 
 
 class Package(models.Model):
@@ -13,6 +13,7 @@ class Package(models.Model):
     is_enable = models.BooleanField(_('is enable', default=True))
     price = models.PositiveIntegerField(_('Price'))
     duration = models.DurationField(_('Duration'), blank=True, null=True)
+    # gateways = models.ManyToManyField('payments.Gateway')
     created_time = models.DateTimeField(_('created time'), auto_now_add=True)
     updated_time = models.DateTimeField(_('updated time'), auto_now=True)
 
