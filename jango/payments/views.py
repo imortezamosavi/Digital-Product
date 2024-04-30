@@ -1,13 +1,17 @@
+import uuid
 import requests
-import timezone
 
+from django.utils import timezone
+
+from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 
 from .models import Gateway, Payment
+from subscriptions.models import Package, Subscription
 from .serializers import GatewaySerializer, PaymentSerializer
+
 # Create your views here.
 class GatewayViews(APIView):
     def get(self, request):
@@ -15,7 +19,6 @@ class GatewayViews(APIView):
         serializer = GatewaySerializer(gateways, many=True)
         return Response(serializer.data)
     
-
 class PaymentViews(APIView):
     Permission_class = [IsAuthenticated]
 
@@ -33,7 +36,7 @@ class PaymentViews(APIView):
             uesr = request.uesr,
             package = package,
             gateway = gateway,
-            price = pachage.price,
+            price = package.price,
             phone_number = request.user.phone_number,
             token = str(uuid.uuid4())
         )
