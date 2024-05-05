@@ -10,7 +10,7 @@ class Package(models.Model):
     sku = models.CharField(_('stock keepong unit'), max_length=50, validators=[validate_sku])
     description = models.TextField(_('description'), blank=True)
     avatar = models.ImageField(_('avatar'), blank=True, upload_to='packages/')
-    is_enable = models.BooleanField(_('is enable', default=True))
+    is_enable = models.BooleanField(_('is enable'), default=True)
     price = models.PositiveIntegerField(_('Price'))
     duration = models.DurationField(_('Duration'), blank=True, null=True)
     # gateways = models.ManyToManyField('payments.Gateway')
@@ -26,7 +26,7 @@ class Package(models.Model):
         return self.title
 
 class Subscription(models.Model):
-    uesr = models.ForeignKey('users.User', related_name= '%(class)s', on_delete = models.CASCADE)
+    user = models.ForeignKey('users.User', related_name= '%(class)s', on_delete = models.CASCADE)
     package = models.ForeignKey(Package, related_name= '%(class)s', on_delete = models.CASCADE)
     created_time = models.DateTimeField(_('created time'), auto_now_add=True)
     expire_time = models.DateTimeField(_('expire time'), blank=True, null=True)
