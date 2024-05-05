@@ -63,7 +63,18 @@ class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_('email Address'), blank=True, null=True, unique=True, help_text=_('Optional. Your email address.'))
     # phone_number = models.CharField(_('phone number'),  max_length=15, blank=True, null=True)
     # phone_number = models.CharField(_('phone number'), max_length=15, blank=True, null=True, unique=True, 
-    phone_number = models.BigIntegerField(_('phone number'), blank=True, null=True, unique=True,
+    # phone_number = models.BigIntegerField(_('phone number'), blank=True, null=True, unique=True,
+    #                                 validators=[
+    #                                     validators.RegexValidator(r'^09\d{9}$',
+    #                                                             _('Enter a valid phone number.'),
+    #                                                             )
+    #                                 ],
+    #                                 error_messages={
+    #                                     'unique': _('A user with this phone number already exists.')
+    #                                 }
+    #                             )
+
+    phone_number = models.CharField(_('phone number'), max_length=15, blank=True, null=True, unique=True,
                                     validators=[
                                         validators.RegexValidator(r'^09\d{9}$',
                                                                 _('Enter a valid phone number.'),
@@ -73,6 +84,7 @@ class User(AbstractBaseUser, PermissionsMixin):
                                         'unique': _('A user with this phone number already exists.')
                                     }
                                 )
+
 
 
     is_staff = models.BooleanField(_('staff status'), default=False, help_text=_('Designates whether the user can access the admin site.'))
