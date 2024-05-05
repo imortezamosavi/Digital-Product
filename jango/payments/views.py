@@ -10,16 +10,16 @@ from rest_framework.permissions import IsAuthenticated
 
 from .models import Gateway, Payment
 from subscriptions.models import Package, Subscription
-from .serializers import GatewaySerializer, PaymentSerializer
+from .serializers import GatewaySerializer
 
 # Create your views here.
-class GatewayViews(APIView):
+class GatewayView(APIView):
     def get(self, request):
         gateways = request.objects.filter(is_enable=True)
         serializer = GatewaySerializer(gateways, many=True)
         return Response(serializer.data)
     
-class PaymentViews(APIView):
+class PaymentView(APIView):
     Permission_class = [IsAuthenticated]
 
     def get(self, request):

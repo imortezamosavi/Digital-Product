@@ -10,6 +10,6 @@ class GatewayAdmin(admin.ModelAdmin):
 
 @admin.register(Payment)
 class PaymentAdmin(admin.ModelAdmin):
-    list_display = ['user', 'package', 'price', 'getway', 'status', 'phone_number', 'device_uuid', 'consumed_code', 'created_time', 'updated_time']
-    list_filter = ['status', 'getway', 'package']
+    list_display = ['user', 'package', 'price', 'gateway', 'status', 'phone_number', 'device_uuid', 'consumed_code', 'created_time', 'updated_time']
+    list_filter = ['status', 'gateway', 'package']
     search_fields = ['uesr__name', 'phone_number']
