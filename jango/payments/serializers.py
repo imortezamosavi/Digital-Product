@@ -5,11 +5,9 @@ from .models import Gateway, Payment
 class GatewaySerializer(serializers.ModelSerializer):
     class Meta:
         model = Gateway
-        fields = ('title', 'sku', 'description', 'avatar', 'price', 'duration')
+        fields = ('title', 'description', 'avatar', 'created_time', 'updated_time')
 
 class PaymentSerializer(serializers.ModelSerializer):
-    package = PackageSerializer()
-
     class Meta:
         model = Payment
-        fields = ('package', 'created_time', 'expire_time')
+        fields = ('user', 'package', 'gateway', 'price', 'status', 'phone_number', 'consumed_code', 'created_time', 'updated_time')
