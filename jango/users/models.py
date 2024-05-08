@@ -62,8 +62,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     last_name = models.CharField(_('last name'), max_length=32, blank=True)
     email = models.EmailField(_('email Address'), blank=True, null=True, unique=True, help_text=_('Optional. Your email address.'))
     # phone_number = models.CharField(_('phone number'),  max_length=15, blank=True, null=True)
-    # phone_number = models.CharField(_('phone number'), max_length=15, blank=True, null=True, unique=True, 
-    phone_number = models.BigIntegerField(_('phone number'), blank=True, null=True, unique=True,
+    # phone_number = models.BigIntegerField(_('phone number'), blank=True, null=True, unique=True,
+    phone_number = models.CharField(_('phone number'), max_length=15, blank=True, null=True, unique=True, 
                                     validators=[
                                         validators.RegexValidator(r'^09\d{9}$',
                                                                 _('Enter a valid phone number.'),
@@ -163,5 +163,5 @@ class Province(models.Model):
     modified_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self) -> str:
+    def __str__(self):
         return self.name

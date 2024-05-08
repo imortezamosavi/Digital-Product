@@ -12,8 +12,8 @@ class MyUserAdmin(UserAdmin):
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
         (_('Personal info'), {'fields': ('first_name', 'last_name', 'phone_number','email')}),
-        (_('Premission'), {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
-        (_('Important_dates'), {'fields': ('last_login', 'date_joined')}),
+        (_('Permission'), {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
+        (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
     )
 
     add_fieldsets = (
@@ -21,13 +21,13 @@ class MyUserAdmin(UserAdmin):
                 'fields': ('username', 'phone_number', 'password1', 'password2')}),
     )
 
-    last_display = ('username', 'phone_number', 'email', 'is_staff')
-    search_fields = ('uesrname__exact',)
+    list_display = ('username', 'phone_number', 'email', 'is_staff')
+    search_fields = ('username__exact',)
     ordering = ('-id', )
 
-    def get_search_results(self, requset, queryset, search_term):
+    def get_search_results(self, request, queryset, search_term):
         queryset, may_have_duplicates = super().get_search_results(
-            requset, queryset, search_term,
+            request, queryset, search_term,
         )
 
         try:
@@ -37,7 +37,7 @@ class MyUserAdmin(UserAdmin):
         else:
             queryset |= self.model.objects.filter(phone_number=search_term_as_int)
         return queryset, may_have_duplicates
-    
+
 admin.site.unregister(Group)
-admin.site.register(Province)
 admin.site.register(User, MyUserAdmin)
+admin.site.register(Province)

@@ -5,7 +5,7 @@ from .models import Gateway, Payment
 
 @admin.register(Gateway)
 class GatewayAdmin(admin.ModelAdmin):
-    list_display = ['title', 'is_enable', 'description', 'created_time', 'updated_time']
+    list_display = ['title', 'is_enable']
 
 
 @admin.register(Payment)
